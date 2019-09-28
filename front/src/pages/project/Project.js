@@ -192,8 +192,8 @@ class Project extends Component {
     <React.Fragment>
       <CssBaseline />
 
-      <main className="prueba">
-        <Paper className="prueba2">
+      <main className="home">
+        <Paper className="paper">
           <Typography component="h1" variant="h4" align="center">
             Iniciativa social
           </Typography>
