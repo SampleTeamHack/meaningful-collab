@@ -42,7 +42,7 @@ function Navbar() {
 
                     <Grid item xs={2}>
                         <div className="logo">
-                            <img src="https://github.com/FernandoMorantes/React-course/blob/master/app_logo.jpg"></img>
+                            <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png"></img>
                         </div>
                     </Grid>
                     <Grid item xs={6}>
