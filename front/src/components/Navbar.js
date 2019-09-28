@@ -41,7 +41,9 @@ function Navbar() {
                     alignItems = "center" >
 
                     <Grid item xs={2}>
-                        <h1>App logo</h1>
+                        <div className="logo">
+                            <img src="https://github.com/FernandoMorantes/React-course/blob/master/app_logo.jpg"></img>
+                        </div>
                     </Grid>
                     <Grid item xs={6}>
                         <form className="search-container">
