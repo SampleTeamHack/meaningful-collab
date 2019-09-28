@@ -3,7 +3,11 @@ import './App.css';
 import Grid from '@material-ui/core/Grid';
 import InfoCards from './components/InfoCards'
 import ProjectsCard from './components/ProjectsCard'
+
 import Navbar from './components/Navbar'
+
+import Carousel from './components/Carousel.js'
+
 
 class App extends Component{
 
@@ -18,8 +22,15 @@ class App extends Component{
     render(){
         return(
             <div className="App">
+
                 <Navbar/>
                 <div className="app_body">
+
+                    <div className="app_body">
+                        <div className="carouselcontainer">
+                            <Carousel />
+                            
+                        </div>
                     <InfoCards/>
                     <h1 class="heading-1">Proyectos</h1>
                     <div class="divider-1"> <span></span></div>
