@@ -11,6 +11,7 @@ import PrometerForm from '../../components/project/PromoterForm';
 import ProjectForm from '../../components/project/ProjectForm';
 import SummaryForm from '../../components/project/SummaryForm';
 import firebase from '../../api/Firebase';
+import './Project.css';
 
 const steps = ['Promotor', 'Proyecto', 'Resumen'];
 
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   layout: {
     width: 'auto',
+    marginTop: theme.spacing(3),
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -31,6 +33,8 @@ const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
@@ -125,7 +129,7 @@ class Project extends Component {
     this.setState({ errorType: false, errorSize: false, button: true });
     const types = ['image/png', 'image/jpeg', 'application/pdf']
     const file = e.target.files[0]
-    const storageRef = firebase.storage().ref(`project/${file.name}`) 
+    const storageRef = firebase.storage().ref(`${file.name}`) 
     console.log(file.size)    
     console.log(file)    
     var errType = 0;
@@ -188,8 +192,8 @@ class Project extends Component {
     <React.Fragment>
       <CssBaseline />
 
-      <main className={this.classes}>
-        <Paper className={this.classes.paper}>
+      <main className="prueba">
+        <Paper className="prueba2">
           <Typography component="h1" variant="h4" align="center">
             Iniciativa social
           </Typography>
@@ -204,17 +208,17 @@ class Project extends Component {
             {this.state.activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Gracias.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                  El proyecto fue creado!.
                 </Typography>
               </React.Fragment>
             ) : (
+              
               <React.Fragment>
                 {this.getStepContent(this.state.activeStep)}
-                <div className={this.classes.buttons}>
+                <div className={this.classes.button}>
                   {this.state.activeStep !== 0 && (
                     <Button onClick={this.handleBack} className={this.classes.button}>
                       Back
