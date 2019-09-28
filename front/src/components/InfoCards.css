@@ -1,0 +1,78 @@
+.info_cards_container{
+    width: 100%;
+    height: 300px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    flex-flow: wrap;
+    background-color: #fafafa;
+}
+
+.card-container {
+    height: 100%;
+    width: 100%;
+}
+
+.card-container .card {
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+}
+.card-container .card a {
+    width: 100%; 
+    height: 300px;
+    border: 2px solid black;
+    background: white;
+    text-decoration: none;
+    color: black;
+    display: block;
+    transition: 0.25s ease;
+    border-radius: 0.5vh;
+    z-index: 3;
+}
+.card-container .card a:hover {
+    transform: translate(-30px, -30px);
+    border-color: #2196F3 ;
+}
+.card-container .card a:hover .card--display {
+    display: none;
+}
+.card-container .card a:hover .card--hover {
+    display: block;
+}
+.card-container .card a .card--display i {
+    font-size: 60px;
+    margin-top: 180px;
+}
+.card-container .card a .card--display h2 {
+    margin: 20px 0 0;
+}
+.card-container .card a .card--hover {
+    display: none;
+}
+.card-container .card a .card--hover h2 {
+    margin: 20px 0;
+}
+.card-container .card a .card--hover p {
+    font-weight: normal;
+    line-height: 1.5;
+}
+.card-container .card a .card--hover p.link {
+    margin: 20px 0 0;
+    font-weight: bold;
+    color: #2196F3 ;
+}
+.card-container .card .card--border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 300px;
+    margin: 0%;     
+    border: 2px dashed black;
+    border-radius: 0.5vh;
+    z-index: -1;
+}
+
+.card-container .card.card--dark a .card--hover .link {
+    color: #2196F3 ;
+}
