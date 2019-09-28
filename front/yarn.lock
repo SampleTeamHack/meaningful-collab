@@ -8713,7 +8713,11 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+<<<<<<< HEAD
 react@^16.10.0, react@^16.4.1:
+=======
+react@^16.10.0:
+>>>>>>> feature/main-page-structure
   version "16.10.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.10.0.tgz#95c41e8fc1c706e174deef54b663b5ab94c8ee32"
   integrity sha512-lc37bD3j6ZWJRso/a1rrFu6CO1qOf30ZadUDBi1c5RHA1lBSWA8x2MGABB6Oikk+RfmgC+kAT+XegL0eD1ecKg==
