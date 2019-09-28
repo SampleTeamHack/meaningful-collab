@@ -49,7 +49,7 @@ function InfoCards() {
                             <div class="card--hover">
                                 <h2>Propone</h2>
                                 <p>Texto descriptivo</p>
-                                <p class="link">Ver mas</p>
+                                <p class="link">Haz click para ver mas</p>
                             </div></a>
                             <div class="card--border"></div>
                         </div>
@@ -69,7 +69,7 @@ function InfoCards() {
                             <div class="card--hover">
                                 <h2>Explora</h2>
                                 <p>Texto descriptivo</p>
-                                <p class="link">Ver mas</p>
+                                <p class="link">Haz click para ver mas</p>
                             </div></a>
                             <div class="card--border"></div>
                         </div>
