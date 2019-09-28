@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Slider from 'react-animated-slider';
-import HorizonalCss from  'react-animated-slider/build/horizontal.css';
+import HorizontalCss from  'react-animated-slider/build/horizontal.css';
 
-import './Carousel.css'
+//import './Carousel.css'
 
 class Carousel extends Component {
 
@@ -40,13 +40,23 @@ class Carousel extends Component {
     }
     render(){
         return(
-            <Slider className = {HorizontalCss}>
-                {this.content.map((proyect, index) => <div key={index}>
-                <img src= {proyect.image}/>
-                <h2>{proyect.title}</h2>
-                <div>{proyect.description}</div>
-            </div>)}
+            
+            <Slider>
+            {this.content.map((item, index) => (
+                <div
+                    key={index}
+                    style={{ background: `url('${item.image}') no-repeat center center` }}
+                >
+                    <div className="center">
+                        <h1>{item.title}</h1>
+                        <p>{item.description}</p>
+                        <button>{item.button}</button>
+                    </div>
+                </div>
+            ))}
             </Slider>
+
+
 
         )
     }
