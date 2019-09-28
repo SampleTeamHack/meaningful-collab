@@ -56,7 +56,7 @@ class Project extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorType: false, errorSize: false, button: true,projectFile:'',
+      errorType: false, errorSize: false, button: true,projectFile:'',uploadValue:0,
       activeStep: 0,
       idCollection: 0,
         name:'',
@@ -176,7 +176,7 @@ class Project extends Component {
       promoterLastName:this.state.promoterLastName,
       promoterEmail:this.state.promoterEmail,
       promoterPhone:this.state.promoterPhone,
-      urlFile:this.state.projectFile
+      urlFile:this.state.urlFile
     }).then(ref => {
       //this.setState({ healthQuote: ref.id, totalValueToPay:  premiumAnnual, idQuote});
       //this.totalValue(this.state.productSelected.premiumAnnual);
