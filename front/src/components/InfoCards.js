@@ -28,7 +28,7 @@ function InfoCards() {
                             </div>
                             <div class="card--hover">
                                 <h2>Ayuda</h2>
-                                <p>Texto descriptivo</p>
+                                <p>Conoce este maravilloso mundo, descubre nuestros proyectos </p>
                                 <p class="link">Haz click para ver mas</p>
                             </div></a>
                             <div class="card--border"></div>
@@ -48,7 +48,7 @@ function InfoCards() {
                             </div>
                             <div class="card--hover">
                                 <h2>Propone</h2>
-                                <p>Texto descriptivo</p>
+                                <p>¿Tienes una idea? ¿Quieres desarrollarla, necesitas recursos?</p>
                                 <p class="link">Haz click para ver mas</p>
                             </div></a>
                             <div class="card--border"></div>
@@ -68,7 +68,7 @@ function InfoCards() {
                             </div>
                             <div class="card--hover">
                                 <h2>Explora</h2>
-                                <p>Texto descriptivo</p>
+                                <p>Explora</p>
                                 <p class="link">Haz click para ver mas</p>
                             </div></a>
                             <div class="card--border"></div>

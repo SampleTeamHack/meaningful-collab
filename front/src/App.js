@@ -5,6 +5,8 @@ import InfoCards from './components/InfoCards'
 import ProjectsCard from './components/ProjectsCard'
 import Carousel from './components/Carousel.js'
 import firebase from './api/Firebase';
+import Project from './pages/project/Project'
+import Navbar from './components/Navbar'
 
 
 class App extends Component{
@@ -60,6 +62,7 @@ class App extends Component{
     render(){
         return(
             <div className="App">
+            <Navbar/>
                     <div className="app_body">
                         <div className="carouselcontainer">
                             <Carousel />
@@ -84,6 +87,7 @@ class App extends Component{
                         <ProjectsCard title={this.state.title2} description={this.state.description2} urlFile={this.state.urlFile2} />
                     </Grid>
                 </Grid>
+                <Project/>
                 </div>
             </div>
         )
