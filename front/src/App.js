@@ -28,9 +28,9 @@ class App extends Component{
 
                     <div className="app_body">
                         <div className="carouselcontainer">
-                            <Carousel />
-                            
+                            <Carousel />   
                         </div>
+                    </div>        
                     <InfoCards/>
                     <h1 class="heading-1">Proyectos</h1>
                     <div class="divider-1"> <span></span></div>
