@@ -8,8 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import firebase from '../../api/Firebase';
-import moment from 'moment';
-//import 'moment/locale/es';
+import { cities } from '../../constants';
+
 
 import './Detail.css';
 
@@ -124,6 +124,7 @@ componentDidMount() {
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
              {this.state.city} 
+             {cities.find(option => option.value === this.state.city)}
             </Typography>        
             <Typography variant="h6" gutterBottom>
               Fin de convocatoria
