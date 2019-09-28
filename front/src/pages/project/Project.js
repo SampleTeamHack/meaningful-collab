@@ -1,8 +1,6 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -12,8 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import PrometerForm from '../../components/project/PromoterForm';
 import ProjectForm from '../../components/project/ProjectForm';
 import SummaryForm from '../../components/project/SummaryForm';
-//import Review from './Review';
+import firebase from '../../api/Firebase';
 
+const steps = ['Promotor', 'Proyecto', 'Resumen'];
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -52,49 +51,149 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['Promotor', 'Proyecto', 'Resumen'];
+class Project extends Component {
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <PrometerForm />;
-    case 1:
-      return <ProjectForm />;
-    case 2:
-      return <SummaryForm />;
-    default:
-      throw new Error('Unknown step');
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorType: false, errorSize: false, button: true,projectFile:'',
+      activeStep: 0,
+      idCollection: 0,
+        name:'',
+        problematic:'',
+        solution:'',
+        method:'',
+        city:'',
+        category:'',
+        deadline:'',
+        estimatedTime:'',
+        promoterAddress:'',
+        promoterFirstName:'',
+        promoterLastName:'',
+        promoterEmail:'',
+        promoterPhone:'',
+        urlFile:''
+    }
+    this.handleOnChange = this.handleOnChange.bind(this);
+
   }
-}
 
-export default function Project() {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  classes = () =>  useStyles();
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+
+  handleNext = () => {
+    this.setActiveStep(this.state.activeStep + 1);
   };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+  handleBack = () => {
+    this.setActiveStep(this.state.activeStep - 1);
   };
 
-  return (
+  setActiveStep = (val) =>{
+    if(this.state.activeStep === steps.length - 1){
+      this.handledFinish();
+    }
+    this.setState({activeStep: val})
+  }
+
+  getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <PrometerForm onChange={this.onChange} />;
+      case 1:
+        return <ProjectForm onChange={this.onChange} handleSelectCategory={this.handleSelectCategory} handleOnChange={this.handleOnChange}/>;
+      case 2:
+        return <SummaryForm data={this.state} />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+
+
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  }
+
+  handleSelectCategory = (e) =>{
+    this.setState({category: e.value});
+  }
+
+  handleOnChange (e) {
+    e.preventDefault();
+    this.setState({ errorType: false, errorSize: false, button: true });
+    const types = ['image/png', 'image/jpeg', 'application/pdf']
+    const file = e.target.files[0]
+    const storageRef = firebase.storage().ref(`project/${file.name}`) 
+    console.log(file.size)    
+    console.log(file)    
+    var errType = 0;
+    var errSize = 0;
+    if (types.every(type => file.type !== type)){ 
+      this.setState({ errorType: true });
+      errType = 1;
+    }  
+    if (file.size >= 1048576) {
+      this.setState({ errorSize: true });
+      errSize = 1;
+    }
+    if(errType === 0 && errSize ===0){
+      const task = storageRef.put(file)
+      this.setState({ projectFile: file.name })  
+  
+      task.on('state_changed', (snapshot) => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log("percentage")
+        console.log(percentage)
+        this.setState({
+          uploadValue: percentage
+        })
+      }, (errorSize) => {
+        console.error("errorSize.message")
+        console.error(errorSize.message)
+      }, () => {
+        task.snapshot.ref.getDownloadURL().then((urlFile) => {           
+          this.setState({ urlFile, button: false });
+        });
+      })
+    }  
+  }
+
+
+  handledFinish(){
+    firebase.firestore().collection('project').add({
+      name:this.state.name,
+      problematic:this.state.problematic,
+      solution:this.state.solution,
+      method:this.state.method,
+      city:'',
+      category:this.state.category,
+      deadline:this.state.deadline,
+      estimatedTime:this.state.estimatedTime,
+      promoterAddress:this.state.promoterAddress,
+      promoterFirstName:this.state.promoterFirstName,
+      promoterLastName:this.state.promoterLastName,
+      promoterEmail:this.state.promoterEmail,
+      promoterPhone:this.state.promoterPhone,
+      urlFile:this.state.projectFile
+    }).then(ref => {
+      //this.setState({ healthQuote: ref.id, totalValueToPay:  premiumAnnual, idQuote});
+      //this.totalValue(this.state.productSelected.premiumAnnual);
+    });
+  }
+
+  render(){
+    return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
+
+      <main className={this.classes}>
+        <Paper className={this.classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             Iniciativa social
           </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
+          <Stepper activeStep={this.state.activeStep} className={this.classes.stepper}>
             {steps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -102,7 +201,7 @@ export default function Project() {
             ))}
           </Stepper>
           <React.Fragment>
-            {activeStep === steps.length ? (
+            {this.state.activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
                   Thank you for your order.
@@ -114,20 +213,20 @@ export default function Project() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
+                {this.getStepContent(this.state.activeStep)}
+                <div className={this.classes.buttons}>
+                  {this.state.activeStep !== 0 && (
+                    <Button onClick={this.handleBack} className={this.classes.button}>
                       Back
                     </Button>
                   )}
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
+                    onClick={this.handleNext}
+                    className={this.classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {this.state.activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                   </Button>
                 </div>
               </React.Fragment>
@@ -137,4 +236,7 @@ export default function Project() {
       </main>
     </React.Fragment>
   );
+  }
 }
+
+export default Project;
