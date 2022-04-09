@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.4.3",
     "firebase": "^7.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.10.0",
     "react-animated-slider": "^1.1.4",
     "react-dom": "^16.10.0",
